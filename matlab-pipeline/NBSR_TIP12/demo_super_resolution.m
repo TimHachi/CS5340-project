@@ -1,0 +1,96 @@
+%==========================================================================
+% * demo super-resolution code for the method described in TIP12 paper *
+%
+%   Haichao Zhang, Yanning Zhang, Haisen Li and Thomas S. Huang, 
+%   Generative Bayesian Image Super-Resolution with Natural Image Prior, 
+%   IEEE Trans. on Image Processing (IEEE TIP), Vol. 21, No. 9, pp.4054-4067, 2012
+
+% Haichao Zhang
+% 2011-8-6
+%==========================================================================
+
+%function demo_super_resolution
+
+addpath(genpath('.'))
+warning off
+
+
+ % load learned image prior
+ mrf = learned_models.cvpr_pw_mrf;  % pairwise MRF 
+ % mrf = learned_models.cvpr_3x3_foe; % 3x3 FoE
+  
+fprintf('Running NBSR ... \n') 
+
+ sigma = 1; % choose noise std
+ img_names = { 'peppers_cut.png', 'hill_cut.png', 'couple_cut.png',    'bar_cut.png','house_cut.png', 'boat_cut.png','cam_cut.png',  'lena_cut.png'};
+ 
+  
+ind_set = 1:8;
+idx = 8; % choose index of img_names
+  
+  for tii = 1:numel(ind_set)
+  
+      idx = ind_set(tii);
+
+      img_clean = double(imread(sprintf('images/%s', img_names{idx})));
+  
+      if(size(img_clean,3)==3)
+            img_clean = double(rgb2gray(imread(sprintf('images/%s', img_names{idx}))));
+      end
+      
+      
+
+  
+  sc = 1; % choose scale (1 => original size)
+ img_clean = imresize(img_clean, sc);
+  
+  
+ 
+  zoom = 3;
+  
+  if(zoom==2)
+      k = fspecial('gaussian', 7,1);
+  elseif(zoom==3)
+      k = fspecial('gaussian', 7,2);
+  elseif(zoom==4)
+      k = fspecial('gaussian', 7, 2);
+  end
+  
+  img_sz = size(img_clean);
+  n_img_sz = zoom*floor(img_sz/zoom);
+  img_clean = imresize(img_clean, n_img_sz);
+  
+  
+  img_blurred = obs_for_SR(img_clean, k, 1, zoom); % blur image
+  
+
+
+  imwrite(uint8(img_blurred), ['LR.bmp'])
+  imwrite(uint8(img_clean), ['GT.bmp'])
+  
+  NN =  imresize(img_blurred, size(img_clean), 'nearest'); 
+  imwrite(uint8(NN), ['NN_PSNR' num2str(pml.image_proc.psnr(img_clean, NN)) '_SSIM' num2str(pml.image_proc.ssim_index(img_clean, NN)) '.bmp'])
+
+  
+  BI = imresize(img_blurred, size(img_clean)); 
+  imwrite(uint8(BI), ['BI_PSNR' num2str(pml.image_proc.psnr(img_clean, BI)) '_SSIM' num2str(pml.image_proc.ssim_index(img_clean, BI)) '.bmp'])
+  
+ 
+  randn('state',0)
+  img_blurred = img_blurred + sigma * randn(size(img_blurred)); % add noise
+  % keep only part of the ground truth image (same size as blurred image)
+  b = (size(k,1)-1)/2; 
+  
+
+  max_iters = 200;
+  
+  noise_sigma = sigma;
+  [img_deblurred, sigma_est, psnr, ssim, eval_res,sigma_set] = NBSR(zoom,mrf, img_blurred, k,  1, img_clean, max_iters);
+
+ 
+  mse = mean((img_clean(:) - img_deblurred(:)).^2);
+  imwrite(uint8(img_deblurred), ['HR_PSNR' num2str(psnr)  'RMSE_' num2str(sqrt(mse)) '_SSIM' num2str(ssim) '.bmp'])
+   
+  
+
+  end 
