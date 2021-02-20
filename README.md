@@ -9,7 +9,7 @@ https://docs.google.com/document/d/1YFZ5YdIZEyuBaCcbRfI52tMouADg_OQU0YzcgFwHHLE/
 ### Conversion of Pipeline to Python:
 | Components        | Location in Python-Pipeline   | Done?  |
 | ----------------- |:-------------:| -----:|
-| NBSR_core/obs_for_SR.m |               | [ ] |
+| NBSR_core/obs_for_SR.m |               | [X] |
 | NBSR_core/get_img_sz.m |               | [ ] |
 | NBSR_core/my_conv2.m   | my_conv2.py   | [X] |
 | NBSR_core/Eval/my_psnr.m   |               | [ ] |
