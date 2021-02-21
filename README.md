@@ -18,8 +18,8 @@ https://docs.google.com/document/d/1YFZ5YdIZEyuBaCcbRfI52tMouADg_OQU0YzcgFwHHLE/
 | NBSR_core/+pml/+image_proc/imfiltermtx.m   |               | [ ] |
 | NBSR_core/+pml/+image_proc/make_convn_mat.m   |               | [ ] |
 | NBSR_core/+pml/+image_proc/make_imfilter_mat.m   |               | [ ] |
-| NBSR_core/+pml/+image_proc/psnr.m   |               | [ ] |
-| NBSR_core/+pml/+image_proc/ssim_index.m   |               | [ ] |
+| NBSR_core/+pml/+image_proc/psnr.m   | pml/image_proc/psnr.py  | [X] |
+| NBSR_core/+pml/+image_proc/ssim_index.m   |  pml/image_proc/ssim_index.py  | [X] |
 | NBSR_core/+pml/+distributions/@foe   |               | [ ] |
 | NBSR_core/+pml/+distributions/@gsm   |               | [ ] |
 | NBSR_core/+pml/+distributions/@gsm_foe   |               | [ ] |
