@@ -25,7 +25,7 @@ https://docs.google.com/document/d/1YFZ5YdIZEyuBaCcbRfI52tMouADg_OQU0YzcgFwHHLE/
 | NBSR_core/+pml/+distributions/@gsm_foe   |               | [ ] |
 | NBSR_core/+pml/+distributions/@gsm_pairwise_mrf   |               | [ ] |
 | NBSR_core/+pml/+distributions/@pairwise_mrf   |               | [ ] |
-| NBSR_core/+pml/+distributions/density.m   |               | [ ] |
-| NBSR_core/+pml/+distributions/distribution.m   |               | [ ] |
+| NBSR_core/+pml/+distributions/density.m   |               | [X] |
+| NBSR_core/+pml/+distributions/distribution.m   |               | [X] |
 | demo_super_resolution_color.m   |               | [ ] |
 | demo_super_resolution.m   |               | [ ] |
