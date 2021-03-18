@@ -1,4 +1,4 @@
-from pypher import psf2otf
+from pypher.pypher import psf2otf
 import numpy as np
 
 # psf2otf

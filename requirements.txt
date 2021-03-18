@@ -1,3 +1,6 @@
 pypher
 numpy
 scipy==1.6.1
+jupyter
+matplotlib
+Pillow
