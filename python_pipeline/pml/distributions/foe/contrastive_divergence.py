@@ -3,20 +3,28 @@ learning_rate = 0.01
 clique_size = [5, 5]
 no_of_filters = 24
 mini_batch_size = 200 
+hybrid_monte_carlo_leap_size = 30
+no_hops_mcmc = 1
 # We want to minimize the KL divergence between
 # Distribution of samples from the dataset, and distribution represented by our modeld
 
 def load_data(path):
     return None
 def getMiniBatchData(data, mini_batch_size):
-    return None
+    batches = sklearn.model_selection.ShuffleSplit(data, mini_batch_size)
+    return batches
 def HybridMonteCarlo(mini_batch_data):
-    return None
+    states = []
+    for i in range(no_hops_mcmc):
+        current = getSamples()
+        states.append(current)
+    return states
 def derive(data):
     return None
 
 data = load_data("../../")
-
+weights = np.zeros()
+model = np.zeros()
 for iteration in range(iterations):
 
     # Get minibatch of 200 images from dataset
@@ -34,3 +42,4 @@ for iteration in range(iterations):
     # Update weights according to KL divergence
     weights = weights + learning_rate * (deriv_wrt_sampled_data - deriv_wrt_model)
 
+ 
