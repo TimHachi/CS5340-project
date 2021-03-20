@@ -6,6 +6,15 @@ mini_batch_size = 200
 # We want to minimize the KL divergence between
 # Distribution of samples from the dataset, and distribution represented by our modeld
 
+def load_data(path):
+    return None
+def getMiniBatchData(data, mini_batch_size):
+    return None
+def HybridMonteCarlo(mini_batch_data):
+    return None
+def derive(data):
+    return None
+
 data = load_data("../../")
 
 for iteration in range(iterations):
@@ -23,5 +32,5 @@ for iteration in range(iterations):
     deriv_wrt_sampled_data = derive(sampled_data)
 
     # Update weights according to KL divergence
-    weights = weights + learning_rate * (pos + neg)
+    weights = weights + learning_rate * (deriv_wrt_sampled_data - deriv_wrt_model)
 
