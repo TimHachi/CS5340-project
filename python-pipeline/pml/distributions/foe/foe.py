@@ -33,10 +33,11 @@ class foe:
     def set_imdims():
     def set_experts():
     def get_nexperts():
-        
+        return len(self.experts)
     def get_nfilters():
         return max(2, len(self.filter))
     def img_cliques():
+        
     def set_filter():
     def get_A():
     def get_J_tilde():
