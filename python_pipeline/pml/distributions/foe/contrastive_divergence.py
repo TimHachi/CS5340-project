@@ -1,3 +1,9 @@
+
+import pymc3 as pm
+
+
+
+
 iterations = 3000
 learning_rate = 0.01
 clique_size = [5, 5]
@@ -16,7 +22,7 @@ def getMiniBatchData(data, mini_batch_size):
 def HybridMonteCarlo(mini_batch_data):
     states = []
     for i in range(no_hops_mcmc):
-        current = getSamples()
+        current = pm.sample(1, step=pm.hmc(), random_seed=123, progressbar=True)
         states.append(current)
     return states
 def derive(data):
